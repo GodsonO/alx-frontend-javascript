@@ -1,47 +1,52 @@
+// Create the Student interface
 interface Student {
-  firstName: string,
-  lastName: string,
-  age: number,
-  location: string
+  firstName: string;
+  lastName: string;
+  age: number;
+  location: string;
 }
 
-const [student1, student2] = [
-  {
-    firstName: "Mark",
-    lastName,: "Oshorenoya"
-    age: 25,
-    location: "Lagos State"
-  },
-  {
-    firstName: "Marcus",
-    lastName: "Imagwe",
-    age: 33,
-    location: "Port Harcourt"
-  },
-]
+// Create two student objects and store them in studentsList array
+const student1: Student = {
+  firstName: "John",
+  lastName: "Doe",
+  age: 20,
+  location: "New York",
+};
 
-const studentsList : Array<Student> = [student1, student2];
+const student2: Student = {
+  firstName: "Jane",
+  lastName: "Smith",
+  age: 22,
+  location: "London",
+};
 
-const body : HTMLBodyElement = document.getElementsByTagName("body")[0];
-const table : HTMLTableElement = document.createElement("table");
-const thead : HTMLTableSectionElement = document.createElement("thead");
-const tbody : HTMLTableSectionElement = document.createElement("tbody");
-const rowHead : HTMLTableRowElement = thead.insertRow(0);
-const firstCellHead : HTMLTableCellElement = rowHead.insertCell(0);
-const secondCellHead : HTMLTableCellElement = rowHead.insertCell(1);
+const studentsList: Student[] = [student1, student2];
 
-firstCellHead.innerHTML = "firstName";
-secondCellHead.innerHTML = "location";
-table.append(thead);
+// Render a table and append a new row for each student in the studentsList array
+const table = document.createElement("table");
+const headerRow = document.createElement("tr");
+const headerFirstName = document.createElement("th");
+const headerLocation = document.createElement("th");
 
-studentsList.forEach(student => {
-  const row : HTMLTableRowElement = tbody.insertRow(0);
-  const firstCell : HTMLTableCellElement = row.insertCell(0);
-  const secondCell : HTMLTableCellElement = row.insertCell(1);
+headerFirstName.textContent = "First Name";
+headerLocation.textContent = "Location";
 
-  firstCell.innerHTML = student.firstName;
-  secondCell.innerHTML = student.location;
+headerRow.appendChild(headerFirstName);
+headerRow.appendChild(headerLocation);
+table.appendChild(headerRow);
+
+studentsList.forEach((student) => {
+  const row = document.createElement("tr");
+  const cellFirstName = document.createElement("td");
+  const cellLocation = document.createElement("td");
+
+  cellFirstName.textContent = student.firstName;
+  cellLocation.textContent = student.location;
+
+  row.appendChild(cellFirstName);
+  row.appendChild(cellLocation);
+  table.appendChild(row);
 });
 
-table.append(tbody);
-table.append(table);
+document.body.appendChild(table);
